@@ -9,17 +9,22 @@ library("ape")
 library("adegenet")
 library("ade4")
 
+# Трансформация в genlight (подходит для SNPs)
 gl <- vcfR2genlight(vcf)
 gl
 
+# Трасформация в snpclone
 gl <- as.snpclone(gl)
 gl
 
 # Расчет эвклидовых генетических дистанций
 distgenEUCL <- dist(gl, method = "euclidean", diag = FALSE, upper = FALSE, p = 2)
 distgenEUCL
-min(distgenEUCL)
-max(distgenEUCL)
+
+# Визуализация Pheatmap
+library("pheatmap")
+sampleDistMatrix = as.matrix(distgenEUCL)
+pheatmap(sampleDistMatrix, clustering_distance_rows=distgenEUCL, clustering_distance_cols=distgenEUCL, fontsize_row = 5, fontsize_col = 5)
 
 # Визуализация NJ
 tre <- nj(dist(as.matrix(gl)))
