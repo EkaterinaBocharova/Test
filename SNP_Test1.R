@@ -13,10 +13,6 @@ library("ade4")
 gl <- vcfR2genlight(vcf)
 gl
 
-# Трасформация в snpclone
-gl <- as.snpclone(gl)
-gl
-
 # Расчет эвклидовых генетических дистанций
 distgenEUCL <- dist(gl, method = "euclidean", diag = FALSE, upper = FALSE, p = 2)
 distgenEUCL
